@@ -1,0 +1,14 @@
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/MonoAndroid,Version=v6.0.AssemblyAttribute.cs
+/Users/willemdejong/Downloads/Domotica/Domotica/bin/Debug/Domotica.dll.mdb
+/Users/willemdejong/Downloads/Domotica/Domotica/bin/Debug/Domotica.dll
+/Users/willemdejong/Downloads/Domotica/Domotica/bin/Debug/Domotica.Domotica.apk
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/android/bin/Domotica.Domotica.apk
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/res/layout/main.xml
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/res/values/strings.xml
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/res/drawable/icon.png
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/res/menu/menu.xml
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/R.cs.flag
+/Users/willemdejong/Downloads/Domotica/Domotica/bin/Debug/Domotica.Domotica-Signed.apk
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/uploadflags.txt
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/Domotica.dll
+/Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/Domotica.dll.mdb
