@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Domotica/Domotica.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_23" />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="Domotica/MainActivity.cs" Line="90" Column="70" />
+      <File FileName="Domotica/Sender.cs" Line="1" Column="1" />
+      <File FileName="Domotica/Receiver.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Domotica AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>
