@@ -62,9 +62,16 @@ namespace Domotica
         Button buttonChangePinState;
 		Button buttonChangePinState2;
 		Button buttonChangePinState3;
+		Button smtemp;
+		Button smlicht;
+		Button sensorSwitch;
         TextView textViewServerConnect, textViewTimerStateValue;
-		public TextView textViewChangePinStateValue, textViewChangePinStateValue2, textViewChangePinStateValue3,  textViewSensorValue, textViewDebugValue;
-        EditText editTextIPAddress, editTextIPPort;
+		public TextView textViewChangePinStateValue, textViewChangePinStateValue2, textViewChangePinStateValue3,  textViewSensorValue, textViewSensorValueb, textViewDebugValue;
+		EditText editTextIPAddress, editTextIPPort, tempvalue, lichtvalue;
+		bool sensor = false;
+		bool specialtemp = false;
+		bool speciallicht = false;
+		int tempvalue1 = 25;
 
         Timer timerClock, timerSockets;             // Timers   
         Socket socket = null;                       // Socket   
@@ -84,15 +91,20 @@ namespace Domotica
             buttonChangePinState = FindViewById<Button>(Resource.Id.buttonChangePinState);
 			buttonChangePinState2 = FindViewById<Button> (Resource.Id.buttonChangePinState2);
 			buttonChangePinState3 = FindViewById<Button> (Resource.Id.buttonChangePinState3);
+			sensorSwitch = FindViewById<Button> (Resource.Id.sensorSwitch);
+			smtemp = FindViewById<Button> (Resource.Id.smtemp);
+			smlicht = FindViewById<Button> (Resource.Id.smlicht);
             textViewTimerStateValue = FindViewById<TextView>(Resource.Id.textViewTimerStateValue);
             textViewServerConnect = FindViewById<TextView>(Resource.Id.textViewServerConnect);
             textViewChangePinStateValue = FindViewById<TextView>(Resource.Id.textViewChangePinStateValue);
 			textViewChangePinStateValue2 = FindViewById<TextView>(Resource.Id.textViewChangePinStateValue2);
 			textViewChangePinStateValue3 = FindViewById<TextView>(Resource.Id.textViewChangePinStateValue3);
             textViewSensorValue = FindViewById<TextView>(Resource.Id.textViewSensorValue);
-            textViewDebugValue = FindViewById<TextView>(Resource.Id.textViewDebugValue);
+			textViewSensorValueb = FindViewById<TextView>(Resource.Id.textViewSensorValueb);
             editTextIPAddress = FindViewById<EditText>(Resource.Id.editTextIPAddress);
             editTextIPPort = FindViewById<EditText>(Resource.Id.editTextIPPort);
+			tempvalue = FindViewById<EditText>(Resource.Id.tempvalue);
+			lichtvalue = FindViewById<EditText>(Resource.Id.lichtvalue);
 
             UpdateConnectionState(4, "Disconnected"); 
 
@@ -100,7 +112,6 @@ namespace Domotica
             commandList.Add(new Tuple<string, TextView>("s", textViewChangePinStateValue));
 			commandList.Add(new Tuple<string, TextView>("t", textViewChangePinStateValue2));
 			commandList.Add(new Tuple<string, TextView>("u", textViewChangePinStateValue3));
-            commandList.Add(new Tuple<string, TextView>("a", textViewSensorValue));
 
             // activation of connector -> threaded sockets otherwise -> simple sockets 
             // connector = new Connector(this);
@@ -128,6 +139,20 @@ namespace Domotica
                         if (++listIndex >= commandList.Count) listIndex = 0;
                     }
                     else timerSockets.Enabled = false;  // If socket broken -> disable timer
+
+				if(sensor)
+				{
+					if(specialtemp)
+					{
+						
+						if(true)
+						{
+							socket.Send(Encoding.ASCII.GetBytes("x"));
+						}
+					}
+
+				}
+
                 //});
             };
 
@@ -162,6 +187,43 @@ namespace Domotica
                     else UpdateConnectionState(3, "Please check IP");
                 };
             }
+
+			if (sensorSwitch != null)  // if button exists
+			{
+				sensorSwitch.Click += (sender, e) =>
+				{
+					if(sensor == false)
+					{
+						sensor = true;
+						commandList.Add(new Tuple<string, TextView>("a", textViewSensorValue));
+						commandList.Add(new Tuple<string, TextView>("b", textViewSensorValueb));
+					}
+					else
+					{
+						sensor = false;
+						commandList.RemoveRange(3,2);
+						textViewSensorValue.Text = "";
+						textViewSensorValueb.Text = "";
+					}
+				};
+			}
+
+			if (smtemp != null)  // if button exists
+			{
+				smtemp.Click += (sender, e) =>
+				{
+					if(specialtemp == false)
+					{
+						specialtemp = true;
+						int tempvalue1 = Convert.ToInt16(tempvalue.Text);
+
+					}
+					else
+					{
+						specialtemp = false;
+					}
+				};
+			}
 
             //Add the "Change pin state" button handler.
             if (buttonChangePinState != null)

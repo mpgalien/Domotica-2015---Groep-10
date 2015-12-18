@@ -15,6 +15,7 @@
   <string name="change_pin_state_value">OFF</string>
   <string name="sensor_text">Sensor value</string>
   <string name="sensor_value">-</string>
+  <string name="sensor_valueb">-</string>
   <string name="debug_text">Debug</string>
   <string name="debug_value">-</string>
   <string name="exit">Exit</string>

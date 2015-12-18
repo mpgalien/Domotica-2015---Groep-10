@@ -29,7 +29,7 @@
             android:text="@string/arduino_server_text"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_height="30.0dp"
             android:id="@+id/textViewServer"
             android:layout_below="@id/textViewTimerState"
             android:layout_alignParentLeft="true" />
@@ -155,28 +155,104 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonChangePinState3" />
-    <TextView
-        android:text="@string/debug_text"
-        android:id="@+id/textViewDebug"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2">
+        <TextView
+            android:text="Temperatuur:"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:id="@+id/temp"
+            android:layout_alignParentLeft="true"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:text="@string/sensor_value"
+            android:id="@+id/textViewSensorValue"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:text="°C"
+            android:id="@+id/textViewSensorValue"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true" />
+        <TextView
+            android:text="Licht:"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:id="@+id/light"
+            android:layout_alignParentLeft="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@id/temp" />
+        <TextView
+            android:text="@string/sensor_valueb"
+            android:id="@+id/textViewSensorValueb"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/temp" />
+        <TextView
+            android:text="lichteenheid"
+            android:id="@+id/textViewSensorValueb"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/textViewSensorValue" />
+    </RelativeLayout>
+    <Button
+        android:text="Sensor Switch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:text="@string/debug_value"
-        android:id="@+id/textViewDebugValue"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:text="@string/sensor_text"
-        android:id="@+id/textViewSensor"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:text="@string/sensor_value"
-        android:id="@+id/textViewSensorValue"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/sensorSwitch" />
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2">
+        <EditText
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempvalue"
+            android:text="25"
+            android:lines="1"
+            android:minLines="1"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:digits="0123456789."
+            android:layout_alignParentLeft="true" />
+        <EditText
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lichtvalue"
+            android:text="40"
+            android:lines="1"
+            android:minLines="1"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:digits="0123456789"
+            android:layout_alignParentRight="true" />
+        <Button
+            android:text="SM Temperatuur"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/smtemp"
+            android:layout_alignParentLeft="true"
+            android:backgroundTint="#ffb31416"
+            android:layout_below="@id/tempvalue" />
+        <Button
+            android:text="SM Licht"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/smlicht"
+            android:layout_alignParentRight="true"
+            android:backgroundTint="#ffb31416"
+            android:layout_below="@id/lichtvalue" />
+    </RelativeLayout>
 </LinearLayout>
