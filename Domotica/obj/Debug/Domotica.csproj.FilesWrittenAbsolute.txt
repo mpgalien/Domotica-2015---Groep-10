@@ -12,3 +12,17 @@
 /Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/uploadflags.txt
 /Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/Domotica.dll
 /Users/willemdejong/Downloads/Domotica/Domotica/obj/Debug/Domotica.dll.mdb
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/MonoAndroid,Version=v6.0.AssemblyAttribute.cs
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/bin/Debug/Domotica.dll.mdb
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/bin/Debug/Domotica.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/bin/Debug/Domotica.Domotica.apk
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/bin/Domotica.Domotica.apk
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/res/layout/main.xml
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/res/values/strings.xml
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/res/drawable/icon.png
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/res/menu/menu.xml
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/R.cs.flag
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/bin/Debug/Domotica.Domotica-Signed.apk
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/uploadflags.txt
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/Domotica.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/Domotica.dll.mdb

@@ -131,6 +131,15 @@ namespace Domotica
                 //});
             };
 
+			string ip = "192.168.1.2";
+			string port = "3300";
+
+			while (socket == null) 
+			{
+				ConnectSocket (ip, port); //Direct connect to arduino
+			}
+
+
             //Add the "Connect" button handler.
             if (buttonConnect != null)  // if button exists
             {
@@ -141,7 +150,7 @@ namespace Domotica
                     {
                         if (connector == null) // -> simple sockets
                         {
-                            ConnectSocket(editTextIPAddress.Text, editTextIPPort.Text);
+                            ConnectSocket(ip, port);
                         }
                         else // -> threaded sockets
                         {
@@ -291,8 +300,6 @@ namespace Domotica
         // Connect to socket ip/prt (simple sockets)
         public void ConnectSocket(string ip, string prt)
         {
-            RunOnUiThread(() =>
-            {
                 if (socket == null)                                       // create new socket
                 {
                     UpdateConnectionState(1, "Connecting...");
@@ -321,7 +328,6 @@ namespace Domotica
                     timerSockets.Enabled = false;
                     UpdateConnectionState(4, "Disconnected");
                 }
-            });
         }
 
         //Close the connection (stop the threads) if the application stops.
