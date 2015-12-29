@@ -1,8 +1,9 @@
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/Domotica.dll
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/Mono.Android.dll
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/mscorlib.dll
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/System.dll
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/System.Xml.dll
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/System.Core.dll
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/System.Runtime.Serialization.dll
-/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/android/assets/System.ServiceModel.Internals.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/Domotica.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/Mono.Android.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/mscorlib.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/System.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/System.Xml.Linq.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/System.Xml.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/System.Core.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/System.Runtime.Serialization.dll
+/Users/willemdejong/Desktop/Informatica1/Domotica/Domotica/obj/Debug/assemblies/System.ServiceModel.Internals.dll

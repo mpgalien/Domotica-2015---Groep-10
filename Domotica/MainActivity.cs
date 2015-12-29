@@ -64,20 +64,27 @@ namespace Domotica
 		Button buttonChangePinState3;
 		Button smtemp;
 		Button smlicht;
-		Button sensorSwitch;
-        TextView textViewServerConnect, textViewTimerStateValue;
-		public TextView textViewChangePinStateValue, textViewChangePinStateValue2, textViewChangePinStateValue3,  textViewSensorValue, textViewSensorValueb, textViewDebugValue;
-		EditText editTextIPAddress, editTextIPPort, tempvalue, lichtvalue;
+		Button tempSwitch;
+		Button lightSwitch;
+		Button count;
+        TextView textViewServerConnect;
+		public TextView textViewChangePinStateValue, textViewChangePinStateValue2, textViewChangePinStateValue3,  textViewSensorValue, textViewSensorValueb, textViewDebugValue, textviewSeconds;
+		EditText editTextIPAddress, editTextIPPort, tempvalue, lichtvalue, countvalue;
 		bool sensor = false;
+		bool tempsensor = false;
+		bool lightsensor = false;
 		bool specialtemp = false;
 		bool speciallicht = false;
 		bool tempvoltageoff = true;
 		bool lichtvoltageoff = true;
+		bool tempfirst = false;
+		bool lightfirst = false;
 		int lichtvalue1;
 		int tempvalue1;
+		int teller = 0;
+		int timerCounter;
 
-
-        Timer timerClock, timerSockets;             // Timers   
+        Timer timerSockets, timerCount;             // Timers   
         Socket socket = null;                       // Socket   
         Connector connector = null;                 // Connector (simple-mode or threaded-mode)
         List<Tuple<string, TextView>> commandList = new List<Tuple<string, TextView>>();  // List for commands and response places on UI
@@ -95,10 +102,10 @@ namespace Domotica
             buttonChangePinState = FindViewById<Button>(Resource.Id.buttonChangePinState);
 			buttonChangePinState2 = FindViewById<Button> (Resource.Id.buttonChangePinState2);
 			buttonChangePinState3 = FindViewById<Button> (Resource.Id.buttonChangePinState3);
-			sensorSwitch = FindViewById<Button> (Resource.Id.sensorSwitch);
+			tempSwitch = FindViewById<Button> (Resource.Id.tempSwitch);
+			lightSwitch = FindViewById<Button> (Resource.Id.lightSwitch);
 			smtemp = FindViewById<Button> (Resource.Id.smtemp);
 			smlicht = FindViewById<Button> (Resource.Id.smlicht);
-            textViewTimerStateValue = FindViewById<TextView>(Resource.Id.textViewTimerStateValue);
             textViewServerConnect = FindViewById<TextView>(Resource.Id.textViewServerConnect);
             textViewChangePinStateValue = FindViewById<TextView>(Resource.Id.textViewChangePinStateValue);
 			textViewChangePinStateValue2 = FindViewById<TextView>(Resource.Id.textViewChangePinStateValue2);
@@ -109,6 +116,10 @@ namespace Domotica
             editTextIPPort = FindViewById<EditText>(Resource.Id.editTextIPPort);
 			tempvalue = FindViewById<EditText>(Resource.Id.tempvalue);
 			lichtvalue = FindViewById<EditText>(Resource.Id.lichtvalue);
+			count = FindViewById<Button> (Resource.Id.count);
+			countvalue = FindViewById<EditText>(Resource.Id.countvalue);
+			textviewSeconds = FindViewById<TextView>(Resource.Id.textViewSeconds);
+
 
             UpdateConnectionState(4, "Disconnected"); 
 
@@ -122,12 +133,19 @@ namespace Domotica
 
             this.Title = (connector == null) ? this.Title + " (simple sockets)" : this.Title + " (thread sockets)";
 
-            // timer object, running clock
-            timerClock = new System.Timers.Timer() { Interval = 2000, Enabled = true }; // Interval >= 1000
-            timerClock.Elapsed += (obj, args) =>
-            {
-                RunOnUiThread(() => { textViewTimerStateValue.Text = DateTime.Now.ToString("h:mm:ss"); }); 
-            };
+
+			// timer object, running clock
+			timerCount = new System.Timers.Timer() { Interval = 1000, Enabled = false }; // Interval >= 1000
+			timerCount.Elapsed += (obj, args) =>
+			{
+				teller++;
+				if(teller == timerCounter)
+				{
+					socket.Send(Encoding.ASCII.GetBytes("x"));
+					teller = 0;
+					timerCount.Enabled = false;
+				}
+			};
 
             // timer object, check Arduino state
             // Only one command can be serviced in an timer tick, schedule from list
@@ -144,7 +162,7 @@ namespace Domotica
                     }
                     else timerSockets.Enabled = false;  // If socket broken -> disable timer
 
-				if(sensor)
+				if(tempsensor || lightsensor)
 				{
 					if(specialtemp)
 					{
@@ -205,7 +223,7 @@ namespace Domotica
                     {
                         if (connector == null) // -> simple sockets
                         {
-							ConnectSocket(ip[i], port);
+							ConnectSocket(ip[0], port);
                         }
                         else // -> threaded sockets
                         {
@@ -218,22 +236,91 @@ namespace Domotica
                 };
             }
 
-			if (sensorSwitch != null)  // if button exists
+			if (count != null)  // if button exists
 			{
-				sensorSwitch.Click += (sender, e) =>
+				count.Click += (sender, e) =>
 				{
-					if(sensor == false)
+					timerCounter = Convert.ToInt16(countvalue.Text);
+					timerCount.Enabled = true;
+				};
+			}
+
+			if (tempSwitch != null)  // if button exists
+			{
+				tempSwitch.Click += (sender, e) =>
+				{
+					if(tempsensor == false)
 					{
-						sensor = true;
+						if(lightfirst)
+						{
+							tempfirst = false;
+						}
+						else
+						{
+							tempfirst = true;
+						}
+						tempsensor = true;
 						commandList.Add(new Tuple<string, TextView>("a", textViewSensorValue));
+					}
+					else
+					{
+						tempsensor = false;
+						if(lightsensor)
+						{
+							if(lightfirst)
+							{
+								commandList.RemoveAt(4);
+							}
+							else
+							{
+								commandList.RemoveAt(3);
+							}
+						}
+						else
+						{
+							commandList.RemoveAt(3);
+						}
+						textViewSensorValue.Text = "-";
+					}
+				};
+			}
+
+			if (lightSwitch != null)  // if button exists
+			{
+				lightSwitch.Click += (sender, e) =>
+				{
+					if(lightsensor == false)
+					{
+						if(tempfirst)
+						{
+							lightfirst = false;
+						}
+						else
+						{
+							lightfirst = true;
+						}
+						lightsensor = true;
 						commandList.Add(new Tuple<string, TextView>("b", textViewSensorValueb));
 					}
 					else
 					{
-						sensor = false;
-						commandList.RemoveRange(3,2);
-						textViewSensorValue.Text = "";
-						textViewSensorValueb.Text = "";
+						lightsensor = false;
+						if(tempsensor)
+						{
+							if(tempfirst)
+							{
+								commandList.RemoveAt(4);
+							}
+							else
+							{
+								commandList.RemoveAt(3);
+							}
+						}
+						else
+						{
+							commandList.RemoveAt(3);
+						}
+						textViewSensorValueb.Text = "-";
 					}
 				};
 			}
@@ -397,6 +484,11 @@ namespace Domotica
                 	buttonChangePinState.Enabled = butPinEnabled;
 					buttonChangePinState2.Enabled = butPinEnabled;
 					buttonChangePinState3.Enabled = butPinEnabled;
+					tempSwitch.Enabled = butPinEnabled;
+					lightSwitch.Enabled = butPinEnabled;
+					smtemp.Enabled = butPinEnabled;
+					smlicht.Enabled = butPinEnabled;
+					count.Enabled = butPinEnabled;
             });
         }
 
