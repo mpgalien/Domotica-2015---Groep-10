@@ -71,7 +71,11 @@ namespace Domotica
 		bool sensor = false;
 		bool specialtemp = false;
 		bool speciallicht = false;
-		int tempvalue1 = 25;
+		bool tempvoltageoff = true;
+		bool lichtvoltageoff = true;
+		int lichtvalue1;
+		int tempvalue1;
+
 
         Timer timerClock, timerSockets;             // Timers   
         Socket socket = null;                       // Socket   
@@ -144,10 +148,31 @@ namespace Domotica
 				{
 					if(specialtemp)
 					{
-						
-						if(true)
+						tempvalue1 = Convert.ToInt16(tempvalue.Text);
+						if(tempvalue1 < Convert.ToInt16(textViewSensorValue.Text) && tempvoltageoff)
 						{
 							socket.Send(Encoding.ASCII.GetBytes("x"));
+							tempvoltageoff = false;
+						}
+						else if(tempvalue1 > Convert.ToInt16(textViewSensorValue.Text) && !tempvoltageoff)
+						{
+							socket.Send(Encoding.ASCII.GetBytes("x"));
+							tempvoltageoff = true;
+						}
+					}
+
+					if(speciallicht)
+					{
+						lichtvalue1 = Convert.ToInt16(lichtvalue.Text);
+						if(lichtvalue1 > Convert.ToInt16(textViewSensorValueb.Text) && lichtvoltageoff)
+						{
+							socket.Send(Encoding.ASCII.GetBytes("y"));
+							lichtvoltageoff = false;
+						}
+						else if(lichtvalue1 < Convert.ToInt16(textViewSensorValueb.Text) && !lichtvoltageoff)
+						{
+							socket.Send(Encoding.ASCII.GetBytes("y"));
+							lichtvoltageoff = true;
 						}
 					}
 
@@ -156,12 +181,17 @@ namespace Domotica
                 //});
             };
 
-			string ip = "192.168.1.2";
+			//string ip = "192.168.1.104";
 			string port = "3300";
+			string [] ip = new string [1];
+			ip [0] = "192.168.1.104";
 
+
+			int i = 0;
 			while (socket == null) 
 			{
-				ConnectSocket (ip, port); //Direct connect to arduino
+				ConnectSocket (ip[i], port); //Direct connect to arduino
+				i++;
 			}
 
 
@@ -175,7 +205,7 @@ namespace Domotica
                     {
                         if (connector == null) // -> simple sockets
                         {
-                            ConnectSocket(ip, port);
+							ConnectSocket(ip[i], port);
                         }
                         else // -> threaded sockets
                         {
@@ -215,12 +245,35 @@ namespace Domotica
 					if(specialtemp == false)
 					{
 						specialtemp = true;
-						int tempvalue1 = Convert.ToInt16(tempvalue.Text);
-
 					}
 					else
 					{
 						specialtemp = false;
+						if(!tempvoltageoff)
+						{
+							socket.Send(Encoding.ASCII.GetBytes("x"));
+							tempvoltageoff = true;
+						}
+					}
+				};
+			}
+
+			if (smlicht != null)  // if button exists
+			{
+				smlicht.Click += (sender, e) =>
+				{
+					if(speciallicht == false)
+					{
+						speciallicht = true;
+					}
+					else
+					{
+						speciallicht = false;
+						if(!lichtvoltageoff)
+						{
+							socket.Send(Encoding.ASCII.GetBytes("y"));
+							lichtvoltageoff = true;
+						}
 					}
 				};
 			}
