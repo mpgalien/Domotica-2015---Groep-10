@@ -65,11 +65,19 @@
             android:layout_alignParentRight="true" />
         <Button
             android:text="@string/button_connect_text"
-            android:layout_width="385dp"
+            android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/editTextIPAddress"
             android:id="@+id/buttonConnect"
             android:layout_alignParentLeft="true"
+            android:backgroundTint="#add8e6ff" />
+        <Button
+            android:text="C"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextIPAddress"
+            android:id="@+id/buttonC"
+            android:layout_alignParentRight="true"
             android:backgroundTint="#add8e6ff" />
         <Button
             android:text="Socket 1"

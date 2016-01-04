@@ -67,6 +67,7 @@ namespace Domotica
 		Button tempSwitch;
 		Button lightSwitch;
 		Button count;
+		Button buttonC;
         TextView textViewServerConnect;
 		public TextView textViewChangePinStateValue, textViewChangePinStateValue2, textViewChangePinStateValue3,  textViewSensorValue, textViewSensorValueb, textViewDebugValue, textviewSeconds;
 		EditText editTextIPAddress, editTextIPPort, tempvalue, lichtvalue, countvalue;
@@ -99,6 +100,7 @@ namespace Domotica
 
             // find and set the controls, so it can be used in the code
             buttonConnect = FindViewById<Button>(Resource.Id.buttonConnect);
+			buttonC = FindViewById<Button>(Resource.Id.buttonC);
             buttonChangePinState = FindViewById<Button>(Resource.Id.buttonChangePinState);
 			buttonChangePinState2 = FindViewById<Button> (Resource.Id.buttonChangePinState2);
 			buttonChangePinState3 = FindViewById<Button> (Resource.Id.buttonChangePinState3);
@@ -202,7 +204,7 @@ namespace Domotica
 			//string ip = "192.168.1.104";
 			string port = "3300";
 			string [] ip = new string [1];
-			ip [0] = "192.168.1.104";
+			ip [0] = "192.168.1.5";
 
 
 			int i = 0;
