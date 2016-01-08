@@ -1,0 +1,4 @@
+com.xamarin.recipes.teacherwatcher.Activity1, GetLocation;md5519adc8c3d16c07338b1ac48d46a74f1.Activity1
+com.xamarin.recipes.teacherwatcher.Activity1, GetLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5519adc8c3d16c07338b1ac48d46a74f1.Activity1
+com.xamarin.recipes.teacherwatcher.Activity1;md5519adc8c3d16c07338b1ac48d46a74f1.Activity1
+com.xamarin.recipes.teacherwatcher.Activity1;md5519adc8c3d16c07338b1ac48d46a74f1.Activity1

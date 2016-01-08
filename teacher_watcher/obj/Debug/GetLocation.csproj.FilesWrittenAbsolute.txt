@@ -1,0 +1,14 @@
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/MonoAndroid,Version=v6.0.AssemblyAttribute.cs
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/com.xamarin.recipes.getlocation.Resources.PolygonPoints.xml
+/Users/willemdejong/Desktop/get_current_device_location/bin/Debug/GetLocation.dll.mdb
+/Users/willemdejong/Desktop/get_current_device_location/bin/Debug/GetLocation.dll
+/Users/willemdejong/Desktop/get_current_device_location/bin/Debug/GetLocation.GetLocation.apk
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/android/bin/GetLocation.GetLocation.apk
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/res/layout/main.xml
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/res/values/strings.xml
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/res/drawable/icon.png
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/R.cs.flag
+/Users/willemdejong/Desktop/get_current_device_location/bin/Debug/GetLocation.GetLocation-Signed.apk
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/uploadflags.txt
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/GetLocation.dll
+/Users/willemdejong/Desktop/get_current_device_location/obj/Debug/GetLocation.dll.mdb

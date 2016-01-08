@@ -68,6 +68,7 @@ namespace Domotica
 		Button lightSwitch;
 		Button count;
 		Button buttonC;
+		Button buttonC_1;
         TextView textViewServerConnect;
 		public TextView textViewChangePinStateValue, textViewChangePinStateValue2, textViewChangePinStateValue3,  textViewSensorValue, textViewSensorValueb, textViewDebugValue, textviewSeconds;
 		EditText editTextIPAddress, editTextIPPort, tempvalue, lichtvalue, countvalue;
@@ -101,6 +102,7 @@ namespace Domotica
             // find and set the controls, so it can be used in the code
             buttonConnect = FindViewById<Button>(Resource.Id.buttonConnect);
 			buttonC = FindViewById<Button>(Resource.Id.buttonC);
+			buttonC_1 = FindViewById<Button> (Resource.Id.buttonC_1);
             buttonChangePinState = FindViewById<Button>(Resource.Id.buttonChangePinState);
 			buttonChangePinState2 = FindViewById<Button> (Resource.Id.buttonChangePinState2);
 			buttonChangePinState3 = FindViewById<Button> (Resource.Id.buttonChangePinState3);
@@ -237,6 +239,24 @@ namespace Domotica
                     else UpdateConnectionState(3, "Please check IP");
                 };
             }
+
+			//Add the "Connect" button handler.
+			if (buttonC != null)  // if button exists
+			{
+				buttonC.Click += (sender, e) =>
+				{
+					socket.Send(Encoding.ASCII.GetBytes("g"));
+				};
+			}
+
+			//Add the "Connect" button handler.
+			if (buttonC_1 != null)  // if button exists
+			{
+				buttonC_1.Click += (sender, e) =>
+				{
+					socket.Send(Encoding.ASCII.GetBytes("h"));
+				};
+			}
 
 			if (count != null)  // if button exists
 			{

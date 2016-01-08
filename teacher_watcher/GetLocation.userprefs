@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Teacher Watcher.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.02157df21c43280f" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Properties/AndroidManifest.xml">
+    <Files>
+      <File FileName="Activity1.cs" Line="1" Column="1" />
+      <File FileName="Properties/AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="Properties/AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="PolygonPoints.xml" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Teacher_220Watcher AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>

@@ -73,11 +73,19 @@
             android:backgroundTint="#add8e6ff" />
         <Button
             android:text="C"
-            android:layout_width="185dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/editTextIPAddress"
             android:id="@+id/buttonC"
             android:layout_alignParentRight="true"
+            android:backgroundTint="#add8e6ff" />
+        <Button
+            android:text="C_1"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextIPAddress"
+            android:id="@+id/buttonC_1"
+            android:layout_toLeftOf="@+id/buttonC"
             android:backgroundTint="#add8e6ff" />
         <Button
             android:text="Socket 1"
