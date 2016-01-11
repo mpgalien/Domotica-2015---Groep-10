@@ -76,6 +76,12 @@ namespace com.xamarin.recipes.teacherwatcher
 
 			InitializeLocationManager();
 			toggleUpdate.Checked = true;
+
+			//OnCreate();
+			checktest.SetTextColor(Color.DarkGray);
+			_There.SetTextColor(Color.DarkGray);
+			toggleUpdate.Enabled = false;
+
 			retrieveset ();
 
 
@@ -174,9 +180,12 @@ namespace com.xamarin.recipes.teacherwatcher
 								timerCount.Enabled = true;
 								login.Text = "logout";
 								editText1.Enabled = false;
+								checktest.SetTextColor(Color.WhiteSmoke);
+								_There.SetTextColor(Color.Red); 
 								wrongemail = false;
 								loggedIn = true;
 								update = true;
+								toggleUpdate.Enabled = true;
 								break;
 							}
 							else{
@@ -193,7 +202,10 @@ namespace com.xamarin.recipes.teacherwatcher
 						timerCount.Enabled = false;
 						login.Text = "login";
 						editText1.Enabled = true;
+						_There.SetTextColor(Color.DarkGray);
+						checktest.SetTextColor(Color.DarkGray);
 						loggedIn = false;
+						toggleUpdate.Enabled = false;
 						update = false;
 					}
 				};

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="22" />
-	<application android:label="Teacher Watcher"></application>
+	<application android:label="Teacher Watcher"
+	android:theme="@android:style/Theme.Material"></application>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 </manifest>

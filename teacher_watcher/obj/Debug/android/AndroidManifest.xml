@@ -4,7 +4,7 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-  <application android:label="Teacher Watcher" android:name="mono.android.app.Application" android:allowBackup="true" android:icon="@drawable/ic_launcher" android:debuggable="true">
+  <application android:label="Teacher Watcher" android:theme="@android:style/Theme.Material" android:name="mono.android.app.Application" android:allowBackup="true" android:icon="@drawable/ic_launcher" android:debuggable="true">
     <activity android:icon="@drawable/ic_launcher" android:label="@string/application_name" android:name="md5519adc8c3d16c07338b1ac48d46a74f1.Activity1">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
