@@ -1,9 +1,14 @@
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/GetLocation.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/Mono.Android.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/mscorlib.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/System.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/System.Xml.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/System.Data.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/System.Core.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/System.Runtime.Serialization.dll
-/Users/willemdejong/Desktop/teacher_watcher/obj/Debug/android/assets/System.ServiceModel.Internals.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/GetLocation.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/Mono.Android.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/mscorlib.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.Xml.Linq.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.Xml.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.Data.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.Core.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.Runtime.Serialization.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.ServiceModel.Internals.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.Numerics.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/System.Transactions.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/Mono.Data.Tds.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/assemblies/Mono.Security.dll

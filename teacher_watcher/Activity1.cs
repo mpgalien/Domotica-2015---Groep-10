@@ -13,6 +13,7 @@ using System.Timers;
 using System.Net;
 using System.Collections.Specialized;
 using Android.Graphics;
+using Android.Content;
 
 namespace com.xamarin.recipes.teacherwatcher
 {
@@ -31,6 +32,7 @@ namespace com.xamarin.recipes.teacherwatcher
 		bool update = true;
 		string adres = null;
 		bool wrongemail;
+		bool loggedIn = false;
 		List<string> mailadressen = new List<string> {"willem-de-jong@hotmail.com", "mpgalien@gmail.com"};
 
 
@@ -71,7 +73,7 @@ namespace com.xamarin.recipes.teacherwatcher
 
 			InitializeLocationManager();
 			toggleUpdate.Checked = true;
-
+			retrieveset ();
 
 
 			timerCount = new System.Timers.Timer() { Interval = 2000, Enabled = false }; // Interval >= 1000
@@ -84,8 +86,7 @@ namespace com.xamarin.recipes.teacherwatcher
 					if (_currentLocation != null && update) {
 						//double x = 5.54325;
 						//double y = 53.23849;
-						if(_currentLocation.Latitude <= 53.212933 && _currentLocation.Latitude >= 53.21125 && _currentLocation.Longitude <= 5.800856 && _currentLocation.Longitude >= 5.797874)
-						{
+						if(_currentLocation.Latitude <= 53.212933 && _currentLocation.Latitude >= 53.21155 && _currentLocation.Longitude <= 5.800883 && _currentLocation.Longitude >= 5.797874)						{
 							_There.Text = String.Format ("Wel");
 							_There.SetTextColor(Color.Green);
 							imageView.SetImageResource (Resource.Drawable.nhl_light);
@@ -149,22 +150,35 @@ namespace com.xamarin.recipes.teacherwatcher
 
 			if (login != null) {  // if button exists
 				login.Click += (sender, e) => {
-					
-					foreach(string x in mailadressen)
+
+					if(!loggedIn)
 					{
-						if(editText1.Text == x){
-							adres = editText1.Text;
-							timerCount.Enabled = true;
-							login.Text = "logout";
-							wrongemail = false;
-							break;
+						foreach(string x in mailadressen)
+						{
+							if(editText1.Text == x){
+								adres = editText1.Text;
+								timerCount.Enabled = true;
+								login.Text = "logout";
+								editText1.Enabled = false;
+								wrongemail = false;
+								loggedIn = true;
+								break;
+							}
+							else{
+								wrongemail = true;
+							}
 						}
-						else{
-							wrongemail = true;
+						if(wrongemail){
+							Toast.MakeText(this, "Emailadres niet juist!", ToastLength.Short).Show ();
 						}
 					}
-					if(wrongemail){
-						Toast.MakeText(this, "Emailadres niet juist!", ToastLength.Short).Show ();
+					else
+					{
+						editText1.Text = "";
+						timerCount.Enabled = false;
+						login.Text = "login";
+						editText1.Enabled = true;
+						loggedIn = false;
 					}
 				};
 
@@ -174,25 +188,53 @@ namespace com.xamarin.recipes.teacherwatcher
 
 
 
-        void InitializeLocationManager()
-        {
-            _locationManager = (LocationManager)GetSystemService(LocationService);
-            Criteria criteriaForLocationService = new Criteria
-                                                  {
-                                                      Accuracy = Accuracy.Fine
-                                                  };
-            IList<string> acceptableLocationProviders = _locationManager.GetProviders(criteriaForLocationService, true);
+		void InitializeLocationManager()
+		{
+			_locationManager = (LocationManager) GetSystemService(LocationService);
+			Criteria criteriaForLocationService = new Criteria
+			{
+				Accuracy = Accuracy.Fine
+			};
+			IList<string> acceptableLocationProviders = _locationManager.GetProviders(criteriaForLocationService, true);
 
-            if (acceptableLocationProviders.Any())
-            {
-                _locationProvider = acceptableLocationProviders.First();
-            }
-            else
-            {
-                _locationProvider = String.Empty;
-            }
-            Log.Debug(LogTag, "Using " + _locationProvider + ".");
-        }
+			if (acceptableLocationProviders.Any())
+			{
+				_locationProvider = acceptableLocationProviders.First();
+			}
+			else
+			{
+				_locationProvider = string.Empty;
+			}
+			Log.Debug(LogTag, "Using " + _locationProvider + ".");
+		}
+
+		protected void saveset(){
+
+			//store
+			var prefs = Application.Context.GetSharedPreferences("MyApp", FileCreationMode.Private);
+			var prefEditor = prefs.Edit();
+			prefEditor.PutString("email", adres);
+			prefEditor.PutBoolean ("update", update);
+			prefEditor.PutBoolean ("loggedIn", loggedIn);
+			prefEditor.Apply ();
+
+		}
+
+		protected void retrieveset()
+		{
+			//retreive 
+			var prefs = Application.Context.GetSharedPreferences("MyApp", FileCreationMode.Private);              
+			adres = prefs.GetString("email", null);
+			update = prefs.GetBoolean ("update", false);
+			loggedIn = prefs.GetBoolean ("loggedIn", false);
+			editText1.Text = adres;
+			if (loggedIn) 
+			{
+				login.Text = "logout";
+				editText1.Enabled = false;
+			}
+		}
+
 
         protected override void OnResume()
         {
@@ -205,8 +247,21 @@ namespace com.xamarin.recipes.teacherwatcher
         {
             base.OnPause();
             _locationManager.RemoveUpdates(this);
+			saveset ();
             Log.Debug(LogTag, "No longer listening for location updates.");
         }
+
+		protected override void OnStop()
+		{
+			base.OnStop();
+			saveset ();
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy ();
+			saveset ();
+		}
 
         
     }

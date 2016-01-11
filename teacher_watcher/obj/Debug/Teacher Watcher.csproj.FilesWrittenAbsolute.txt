@@ -17,3 +17,19 @@
 /Users/willemdejong/Desktop/teacher_watcher/obj/Debug/res/drawable/sample1.png
 /Users/willemdejong/Desktop/teacher_watcher/obj/Debug/res/drawable/nhl_dark.jpg
 /Users/willemdejong/Desktop/teacher_watcher/obj/Debug/res/drawable/nhl_light.jpg
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/MonoAndroid,Version=v6.0.AssemblyAttribute.cs
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/GetLocation.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/GetLocation.dll.mdb
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/com.xamarin.recipes.teacherwatcher.Resources.PolygonPoints.xml
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/bin/Debug/GetLocation.dll.mdb
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/bin/Debug/GetLocation.dll
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/bin/Debug/GetLocation.GetLocation.apk
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/android/bin/GetLocation.GetLocation.apk
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/res/layout/main.xml
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/res/drawable/ic_launcher.png
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/res/drawable/nhl_dark.jpg
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/res/drawable/nhl_light.jpg
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/res/values/strings.xml
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/R.cs.flag
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/bin/Debug/GetLocation.GetLocation-Signed.apk
+/Users/MPGalien/Google Drive/NHL/Jaar 1/Periode 2/Embedded Systems 1/Domotica/Domotica-2015---Groep-10/teacher_watcher/obj/Debug/uploadflags.txt
