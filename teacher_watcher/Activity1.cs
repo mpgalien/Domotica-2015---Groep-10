@@ -26,6 +26,7 @@ namespace com.xamarin.recipes.teacherwatcher
 		Timer timerCount;
 		Button login;
 		TextView checktest;
+		TextView _There;
 
         string _locationProvider;
 		EditText editText1;
@@ -70,7 +71,7 @@ namespace com.xamarin.recipes.teacherwatcher
 			editText1 = FindViewById<EditText> (Resource.Id.editText1);
 			login = FindViewById<Button> (Resource.Id.login);
 			checktest = FindViewById<TextView> (Resource.Id.checktest);
-			TextView _There = FindViewById<TextView>(Resource.Id.checktest1);
+			_There = FindViewById<TextView>(Resource.Id.checktest1);
 
 			toggleUpdate = FindViewById<ToggleButton> (Resource.Id.toggleUpdate);
 
@@ -78,9 +79,11 @@ namespace com.xamarin.recipes.teacherwatcher
 			toggleUpdate.Checked = true;
 
 			//OnCreate();
-			checktest.SetTextColor(Color.DarkGray);
-			_There.SetTextColor(Color.DarkGray);
-			toggleUpdate.Enabled = false;
+			if (!loggedIn) {
+				checktest.SetTextColor (Color.DarkGray);
+				_There.SetTextColor (Color.DarkGray);
+				toggleUpdate.Enabled = false;
+			}
 
 			retrieveset ();
 
@@ -260,6 +263,9 @@ namespace com.xamarin.recipes.teacherwatcher
 			{
 				login.Text = "logout";
 				editText1.Enabled = false;
+				checktest.SetTextColor(Color.WhiteSmoke);
+				toggleUpdate.Enabled = true;
+				_There.SetTextColor(Color.Red); 
 			}
 		}
 
