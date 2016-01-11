@@ -25,11 +25,12 @@ namespace com.xamarin.recipes.teacherwatcher
         LocationManager _locationManager;
 		Timer timerCount;
 		Button login;
+		TextView checktest;
 
         string _locationProvider;
 		EditText editText1;
 		ToggleButton toggleUpdate;
-		bool update = true;
+		bool update = false;
 		string adres = null;
 		bool wrongemail;
 		bool loggedIn = false;
@@ -68,6 +69,8 @@ namespace com.xamarin.recipes.teacherwatcher
 			ImageView imageView = FindViewById<ImageView> (Resource.Id.demoImageView);
 			editText1 = FindViewById<EditText> (Resource.Id.editText1);
 			login = FindViewById<Button> (Resource.Id.login);
+			checktest = FindViewById<TextView> (Resource.Id.checktest);
+			TextView _There = FindViewById<TextView>(Resource.Id.checktest1);
 
 			toggleUpdate = FindViewById<ToggleButton> (Resource.Id.toggleUpdate);
 
@@ -81,7 +84,7 @@ namespace com.xamarin.recipes.teacherwatcher
 			{
 				RunOnUiThread(() => { 
 
-					TextView _There = FindViewById<TextView>(Resource.Id.checktest1);
+
 
 					if (_currentLocation != null && update) {
 						//double x = 5.54325;
@@ -125,7 +128,13 @@ namespace com.xamarin.recipes.teacherwatcher
 						}
 					} else {
 						_There.Text = String.Format ("Geen locatie");
-						_There.SetTextColor(Color.Red);
+						if(update)
+						{
+							_There.SetTextColor(Color.Red);
+						}
+						else{
+							_There.SetTextColor(Color.DarkGray);
+						}
 					}
 				
 				
@@ -137,10 +146,15 @@ namespace com.xamarin.recipes.teacherwatcher
 				toggleUpdate.Click += (sender, e) => {
 					if (toggleUpdate.Checked){
 						Toast.MakeText(this, "Teacher Watcher Ingeschakeld", ToastLength.Short).Show ();
+						checktest.SetTextColor(Color.WhiteSmoke);
+						_There.SetTextColor(Color.Red); 
 						update = true;
 					}
 					else{
 						Toast.MakeText(this, "Teacher Watcher Uitgeschakeld", ToastLength.Short).Show ();
+						imageView.SetImageResource (Resource.Drawable.nhl_dark);
+						checktest.SetTextColor(Color.DarkGray);
+						_There.SetTextColor(Color.DarkGray);
 						update = false;
 					}
 				};
@@ -162,6 +176,7 @@ namespace com.xamarin.recipes.teacherwatcher
 								editText1.Enabled = false;
 								wrongemail = false;
 								loggedIn = true;
+								update = true;
 								break;
 							}
 							else{
@@ -179,6 +194,7 @@ namespace com.xamarin.recipes.teacherwatcher
 						login.Text = "login";
 						editText1.Enabled = true;
 						loggedIn = false;
+						update = false;
 					}
 				};
 
