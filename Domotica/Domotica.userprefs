@@ -1,0 +1,12 @@
+﻿<Properties StartupItem="Domotica.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_23" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MainActivity.cs">
+    <Files>
+      <File FileName="MainActivity.cs" Line="209" Column="25" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

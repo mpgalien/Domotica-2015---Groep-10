@@ -35,7 +35,7 @@ namespace com.xamarin.recipes.teacherwatcher
 		string adres = null;
 		bool wrongemail;
 		bool loggedIn = false;
-		List<string> mailadressen = new List<string> {"willem-de-jong@hotmail.com", "mpgalien@gmail.com"};
+		List<string> mailadressen = new List<string> {"willem-de-jong@hotmail.com", "mpgalien@gmail.com", "j.foppele@nhl.nl"};
 
 
 
@@ -76,7 +76,7 @@ namespace com.xamarin.recipes.teacherwatcher
 			toggleUpdate = FindViewById<ToggleButton> (Resource.Id.toggleUpdate);
 
 			InitializeLocationManager();
-			toggleUpdate.Checked = true;
+			//toggleUpdate.Checked = true;
 
 			//OnCreate();
 			if (!loggedIn) {
@@ -93,8 +93,6 @@ namespace com.xamarin.recipes.teacherwatcher
 			{
 				RunOnUiThread(() => { 
 
-
-
 					if (_currentLocation != null && update) {
 						//double x = 5.54325;
 						//double y = 53.23849;
@@ -105,7 +103,6 @@ namespace com.xamarin.recipes.teacherwatcher
 							WebClient client = new WebClient();
 							Uri uri = new Uri("http://82.73.15.137/?actie=locatie");
 							NameValueCollection parameters = new NameValueCollection();
-
 
 
 							parameters.Add("email", adres);
@@ -182,6 +179,7 @@ namespace com.xamarin.recipes.teacherwatcher
 								adres = editText1.Text;
 								timerCount.Enabled = true;
 								login.Text = "logout";
+								toggleUpdate.Checked = true;
 								editText1.Enabled = false;
 								checktest.SetTextColor(Color.WhiteSmoke);
 								_There.SetTextColor(Color.Red); 
@@ -204,8 +202,10 @@ namespace com.xamarin.recipes.teacherwatcher
 						editText1.Text = "";
 						timerCount.Enabled = false;
 						login.Text = "login";
+						toggleUpdate.Checked = false;
 						editText1.Enabled = true;
 						_There.SetTextColor(Color.DarkGray);
+						imageView.SetImageResource (Resource.Drawable.nhl_dark);
 						checktest.SetTextColor(Color.DarkGray);
 						loggedIn = false;
 						toggleUpdate.Enabled = false;
@@ -263,9 +263,9 @@ namespace com.xamarin.recipes.teacherwatcher
 			{
 				login.Text = "logout";
 				editText1.Enabled = false;
-				checktest.SetTextColor(Color.WhiteSmoke);
 				toggleUpdate.Enabled = true;
-				_There.SetTextColor(Color.Red); 
+				_There.SetTextColor(Color.Red);
+				checktest.SetTextColor (Color.WhiteSmoke);
 			}
 		}
 
@@ -275,6 +275,12 @@ namespace com.xamarin.recipes.teacherwatcher
             base.OnResume();
             _locationManager.RequestLocationUpdates(_locationProvider, 0, 0, this);
             Log.Debug(LogTag, "Listening for location updates using " + _locationProvider + ".");
+			if (update) {
+				toggleUpdate.Checked = true;
+			}
+			if (!update) {
+				checktest.SetTextColor (Color.DarkGray);
+			}
         }
 
         protected override void OnPause()

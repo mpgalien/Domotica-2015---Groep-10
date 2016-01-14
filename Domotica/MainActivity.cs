@@ -206,7 +206,7 @@ namespace Domotica
 			//string ip = "192.168.1.104";
 			string port = "3300";
 			string [] ip = new string [1];
-			ip [0] = "192.168.1.5";
+			ip [0] = "192.168.1.2";
 
 
 			int i = 0;
