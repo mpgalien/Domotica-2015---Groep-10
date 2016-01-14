@@ -277,6 +277,7 @@ namespace com.xamarin.recipes.teacherwatcher
             Log.Debug(LogTag, "Listening for location updates using " + _locationProvider + ".");
 			if (update) {
 				toggleUpdate.Checked = true;
+				timerCount.Enabled = true;
 			}
 			if (!update) {
 				checktest.SetTextColor (Color.DarkGray);
@@ -288,6 +289,7 @@ namespace com.xamarin.recipes.teacherwatcher
             base.OnPause();
             _locationManager.RemoveUpdates(this);
 			saveset ();
+			timerCount.Enabled = false;
             Log.Debug(LogTag, "No longer listening for location updates.");
         }
 
@@ -295,12 +297,14 @@ namespace com.xamarin.recipes.teacherwatcher
 		{
 			base.OnStop();
 			saveset ();
+			timerCount.Enabled = false;
 		}
 
 		protected override void OnDestroy()
 		{
 			base.OnDestroy ();
 			saveset ();
+			timerCount.Enabled = false;
 		}
 
         
