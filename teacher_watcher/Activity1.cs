@@ -87,8 +87,11 @@ namespace com.xamarin.recipes.teacherwatcher
 
 			retrieveset ();
 
-
-			timerCount = new System.Timers.Timer() { Interval = 2000, Enabled = false }; // Interval >= 1000
+			/*All timerCount is ingeschakeld wordt op basis van de locatiegegevens die de telefoon doorgeeft bepaalt of je binnen de grenzen
+			 * van de NHL bent. Als dit het geval is wordt aangegeven in de app doormiddel van een groene tekst en een oplichtend plaatje van
+			 * het NHL gebouw. Vervolgens worden er een aantal gegevens verstuurd naar de webserver.
+			 */
+			timerCount = new System.Timers.Timer() { Interval = 2000, Enabled = false };
 			timerCount.Elapsed += (obj, args) =>
 			{
 				RunOnUiThread(() => { 
@@ -114,6 +117,9 @@ namespace com.xamarin.recipes.teacherwatcher
 							client.UploadValuesAsync(uri, parameters);
 
 						}
+						/*Als je niet aanwezig bent, wordt dit in de app aangegeven met een rode tekst. Vervolgens worden er een aantal gegevens
+						 * verstuurd naar de webserver.
+						 */
 						else { 
 							_There.Text = String.Format ("Niet");
 							_There.SetTextColor(Color.Red);
@@ -147,7 +153,9 @@ namespace com.xamarin.recipes.teacherwatcher
 				}); 
 			};
 				
-
+			/*Toggle button waarme je het tracken aan/uit kan zetten. Op basis van of dit aan/uitgeschakeld is veranderen er een paar visuele
+			 * elementen in de app.
+			*/
 			if (toggleUpdate != null) {  // if button exists
 				toggleUpdate.Click += (sender, e) => {
 					if (toggleUpdate.Checked){
@@ -167,10 +175,15 @@ namespace com.xamarin.recipes.teacherwatcher
 
 			}
 
-
+			//Login/logout button
 			if (login != null) {  // if button exists
 				login.Click += (sender, e) => {
 
+					/* Als je nog niet ingelogd bent, en dus op login drukt, wordt er eerst gecontroleerd of het ingevoerde e-mailadres een 
+					 * geldig e-mailadres is. Als dit niet het geval is, wordt dit aan de gebruiker gemeld. Als het e-mailadres wel goed is
+					 * wordt dit opgeslagen, de timerCount aangezet, de tekst op de knop verandert naar LOGOUT, het e-mailadres invoerveld 
+					 * kun je nu niet meer aanpassen, tekstkleuren worden aangepast, en het updaten van de locatie wordt aangezet.
+					 */ 
 					if(!loggedIn)
 					{
 						foreach(string x in mailadressen)
@@ -197,6 +210,10 @@ namespace com.xamarin.recipes.teacherwatcher
 							Toast.MakeText(this, "Emailadres niet juist!", ToastLength.Short).Show ();
 						}
 					}
+					/* Als je ingelogd bent, en op LOGOUT klikt, wordt het e-mailadres invoerveld geleegd en weer aanpasbaar, de knoptekst 
+					 * veranderd naar LOGIN, de kleur van tekstregels aangepast, de afbeelding van het NHL gebouw op donker gezet en de update 
+					 * uitgezet.
+					 */
 					else
 					{
 						editText1.Text = "";
@@ -218,7 +235,7 @@ namespace com.xamarin.recipes.teacherwatcher
 		}
 
 
-
+		//Deze functie initialiseert de LocatieManager
 		void InitializeLocationManager()
 		{
 			_locationManager = (LocationManager) GetSystemService(LocationService);
@@ -239,6 +256,7 @@ namespace com.xamarin.recipes.teacherwatcher
 			Log.Debug(LogTag, "Using " + _locationProvider + ".");
 		}
 
+		//Deze functie maakt het mogelijk om de gegevens op te slaan, zoals e-mailadres, updatestatus en loginstatus.
 		protected void saveset(){
 
 			//store
@@ -251,6 +269,7 @@ namespace com.xamarin.recipes.teacherwatcher
 
 		}
 
+		//Deze functie haalt eventueel opgeslagen gegevens op en set de juiste variabelen met de opgeslagen waarden.
 		protected void retrieveset()
 		{
 			//retreive 
@@ -269,7 +288,7 @@ namespace com.xamarin.recipes.teacherwatcher
 			}
 		}
 
-
+		//Standaardfunctie die is aangepast om de app goed te laten werken als deze naar de achtergrond was verplaatst en weer wordt aangeroepen
         protected override void OnResume()
         {
             base.OnResume();
@@ -284,6 +303,7 @@ namespace com.xamarin.recipes.teacherwatcher
 			}
         }
 
+		//Standaardfunctie die is aangepast om de gegevens op te slaan met saveset(); en de timer uit te zetten.
         protected override void OnPause()
         {
             base.OnPause();
@@ -293,6 +313,7 @@ namespace com.xamarin.recipes.teacherwatcher
             Log.Debug(LogTag, "No longer listening for location updates.");
         }
 
+		//Standaardfunctie die is aangepast om de gegevens op te slaan met saveset()l en de timer uit te zetten.
 		protected override void OnStop()
 		{
 			base.OnStop();
@@ -300,6 +321,7 @@ namespace com.xamarin.recipes.teacherwatcher
 			timerCount.Enabled = false;
 		}
 
+		//Standaardfunctie die is aangepast om de gegevens op te slaan met saveset()l en de timer uit te zetten.
 		protected override void OnDestroy()
 		{
 			base.OnDestroy ();
