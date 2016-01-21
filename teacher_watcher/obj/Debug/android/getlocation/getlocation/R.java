@@ -17,10 +17,10 @@ public final class R {
     }
     public static final class id {
         public static final int checktest=0x7f050005;
-        public static final int checktest1=0x7f050006;
         public static final int demoImageView=0x7f050007;
-        public static final int editText1=0x7f050001;
+        public static final int editEmail=0x7f050001;
         public static final int login=0x7f050002;
+        public static final int presence=0x7f050006;
         public static final int relativeLayout1=0x7f050003;
         public static final int relativeLayout2=0x7f050000;
         public static final int toggleUpdate=0x7f050004;

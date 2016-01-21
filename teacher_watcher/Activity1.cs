@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* NHL Teacher Watcher
+ * Groep 10
+ * Domotica Project
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,16 +24,15 @@ namespace com.xamarin.recipes.teacherwatcher
 	[Activity(Label = "@string/application_name", MainLauncher = true, Icon = "@drawable/ic_launcher")]
     public class Activity1 : Activity, ILocationListener
     {
-        static readonly string LogTag = "GetLocation";
         Location _currentLocation;
         LocationManager _locationManager;
 		Timer timerCount;
 		Button login;
 		TextView checktest;
-		TextView _There;
+		TextView presence;
 
         string _locationProvider;
-		EditText editText1;
+		EditText editEmail;
 		ToggleButton toggleUpdate;
 		bool update = false;
 		string adres = null;
@@ -38,7 +41,7 @@ namespace com.xamarin.recipes.teacherwatcher
 		List<string> mailadressen = new List<string> {"willem-de-jong@hotmail.com", "mpgalien@gmail.com", "j.foppele@nhl.nl"};
 
 
-
+		//Standaard functie Android, zodra de Locatie veranderd wordt deze opgeslagen in een variable
         public void OnLocationChanged(Location location)
         {
 			_currentLocation = location;
@@ -47,41 +50,38 @@ namespace com.xamarin.recipes.teacherwatcher
 			}
 
         }
-
+		//Standaard functie Android, voor locatie!
         public void OnProviderDisabled(string provider)
         {
         }
-
+		//Standaard functie Android, voor locatie!
         public void OnProviderEnabled(string provider)
         {
         }
-
+		//Standaard functie Android, voor locatie!
         public void OnStatusChanged(string provider, Availability status, Bundle extras)
         {
-            Log.Debug(LogTag, "{0}, {1}", provider, status);
         }
 
+		//Functie die wordt aangeroepen wanneer de app wordt opgestart
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-			//TextView _There = FindViewById<TextView>(Resource.Id.checktest);
 			ImageView imageView = FindViewById<ImageView> (Resource.Id.demoImageView);
-			editText1 = FindViewById<EditText> (Resource.Id.editText1);
+			editEmail = FindViewById<EditText> (Resource.Id.editEmail);
 			login = FindViewById<Button> (Resource.Id.login);
 			checktest = FindViewById<TextView> (Resource.Id.checktest);
-			_There = FindViewById<TextView>(Resource.Id.checktest1);
+			presence = FindViewById<TextView>(Resource.Id.presence);
 
 			toggleUpdate = FindViewById<ToggleButton> (Resource.Id.toggleUpdate);
 
 			InitializeLocationManager();
-			//toggleUpdate.Checked = true;
 
-			//OnCreate();
 			if (!loggedIn) {
 				checktest.SetTextColor (Color.DarkGray);
-				_There.SetTextColor (Color.DarkGray);
+				presence.SetTextColor (Color.DarkGray);
 				toggleUpdate.Enabled = false;
 			}
 
@@ -97,14 +97,12 @@ namespace com.xamarin.recipes.teacherwatcher
 				RunOnUiThread(() => { 
 
 					if (_currentLocation != null && update) {
-						//double x = 5.54325;
-						//double y = 53.23849;
 						if(_currentLocation.Latitude <= 53.212933 && _currentLocation.Latitude >= 53.21155 && _currentLocation.Longitude <= 5.800883 && _currentLocation.Longitude >= 5.797874)						{
-							_There.Text = String.Format ("Wel");
-							_There.SetTextColor(Color.Green);
+							presence.Text = String.Format ("Wel");
+							presence.SetTextColor(Color.Green);
 							imageView.SetImageResource (Resource.Drawable.nhl_light);
 							WebClient client = new WebClient();
-							Uri uri = new Uri("http://82.73.15.137/?actie=locatie");
+							Uri uri = new Uri("http://82.73.15.137/?actie=locatie"); //Webserver Raspberry Pi
 							NameValueCollection parameters = new NameValueCollection();
 
 
@@ -121,11 +119,11 @@ namespace com.xamarin.recipes.teacherwatcher
 						 * verstuurd naar de webserver.
 						 */
 						else { 
-							_There.Text = String.Format ("Niet");
-							_There.SetTextColor(Color.Red);
+							presence.Text = String.Format ("Niet");
+							presence.SetTextColor(Color.Red);
 							imageView.SetImageResource (Resource.Drawable.nhl_dark);
 							WebClient client = new WebClient();
-							Uri uri = new Uri("http://82.73.15.137/?actie=locatie");
+							Uri uri = new Uri("http://82.73.15.137/?actie=locatie"); //Webserver Raspberry Pi
 							NameValueCollection parameters = new NameValueCollection();
 
 
@@ -139,13 +137,13 @@ namespace com.xamarin.recipes.teacherwatcher
 						
 						}
 					} else {
-						_There.Text = String.Format ("Geen locatie");
+						presence.Text = String.Format ("Geen locatie");
 						if(update)
 						{
-							_There.SetTextColor(Color.Red);
+							presence.SetTextColor(Color.Red);
 						}
 						else{
-							_There.SetTextColor(Color.DarkGray);
+							presence.SetTextColor(Color.DarkGray);
 						}
 					}
 				
@@ -153,7 +151,7 @@ namespace com.xamarin.recipes.teacherwatcher
 				}); 
 			};
 				
-			/*Toggle button waarme je het tracken aan/uit kan zetten. Op basis van of dit aan/uitgeschakeld is veranderen er een paar visuele
+			/*Toggle button waarmee je het tracken aan/uit kan zetten. Op basis van of dit aan/uitgeschakeld is veranderen er een paar visuele
 			 * elementen in de app.
 			*/
 			if (toggleUpdate != null) {  // if button exists
@@ -161,14 +159,14 @@ namespace com.xamarin.recipes.teacherwatcher
 					if (toggleUpdate.Checked){
 						Toast.MakeText(this, "Teacher Watcher Ingeschakeld", ToastLength.Short).Show ();
 						checktest.SetTextColor(Color.WhiteSmoke);
-						_There.SetTextColor(Color.Red); 
+						presence.SetTextColor(Color.Red); 
 						update = true;
 					}
 					else{
 						Toast.MakeText(this, "Teacher Watcher Uitgeschakeld", ToastLength.Short).Show ();
 						imageView.SetImageResource (Resource.Drawable.nhl_dark);
 						checktest.SetTextColor(Color.DarkGray);
-						_There.SetTextColor(Color.DarkGray);
+						presence.SetTextColor(Color.DarkGray);
 						update = false;
 					}
 				};
@@ -188,14 +186,14 @@ namespace com.xamarin.recipes.teacherwatcher
 					{
 						foreach(string x in mailadressen)
 						{
-							if(editText1.Text == x){
-								adres = editText1.Text;
+							if(editEmail.Text == x){
+								adres = editEmail.Text;
 								timerCount.Enabled = true;
 								login.Text = "logout";
 								toggleUpdate.Checked = true;
-								editText1.Enabled = false;
+								editEmail.Enabled = false;
 								checktest.SetTextColor(Color.WhiteSmoke);
-								_There.SetTextColor(Color.Red); 
+								presence.SetTextColor(Color.Red); 
 								wrongemail = false;
 								loggedIn = true;
 								update = true;
@@ -216,12 +214,12 @@ namespace com.xamarin.recipes.teacherwatcher
 					 */
 					else
 					{
-						editText1.Text = "";
+						editEmail.Text = "";
 						timerCount.Enabled = false;
 						login.Text = "login";
 						toggleUpdate.Checked = false;
-						editText1.Enabled = true;
-						_There.SetTextColor(Color.DarkGray);
+						editEmail.Enabled = true;
+						presence.SetTextColor(Color.DarkGray);
 						imageView.SetImageResource (Resource.Drawable.nhl_dark);
 						checktest.SetTextColor(Color.DarkGray);
 						loggedIn = false;
@@ -253,7 +251,6 @@ namespace com.xamarin.recipes.teacherwatcher
 			{
 				_locationProvider = string.Empty;
 			}
-			Log.Debug(LogTag, "Using " + _locationProvider + ".");
 		}
 
 		//Deze functie maakt het mogelijk om de gegevens op te slaan, zoals e-mailadres, updatestatus en loginstatus.
@@ -277,13 +274,13 @@ namespace com.xamarin.recipes.teacherwatcher
 			adres = prefs.GetString("email", null);
 			update = prefs.GetBoolean ("update", false);
 			loggedIn = prefs.GetBoolean ("loggedIn", false);
-			editText1.Text = adres;
+			editEmail.Text = adres;
 			if (loggedIn) 
 			{
 				login.Text = "logout";
-				editText1.Enabled = false;
+				editEmail.Enabled = false;
 				toggleUpdate.Enabled = true;
-				_There.SetTextColor(Color.Red);
+				presence.SetTextColor(Color.Red);
 				checktest.SetTextColor (Color.WhiteSmoke);
 			}
 		}
@@ -293,7 +290,6 @@ namespace com.xamarin.recipes.teacherwatcher
         {
             base.OnResume();
             _locationManager.RequestLocationUpdates(_locationProvider, 0, 0, this);
-            Log.Debug(LogTag, "Listening for location updates using " + _locationProvider + ".");
 			if (update) {
 				toggleUpdate.Checked = true;
 				timerCount.Enabled = true;
@@ -310,7 +306,6 @@ namespace com.xamarin.recipes.teacherwatcher
             _locationManager.RemoveUpdates(this);
 			saveset ();
 			timerCount.Enabled = false;
-            Log.Debug(LogTag, "No longer listening for location updates.");
         }
 
 		//Standaardfunctie die is aangepast om de gegevens op te slaan met saveset()l en de timer uit te zetten.
