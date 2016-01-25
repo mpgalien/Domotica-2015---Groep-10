@@ -63,7 +63,7 @@ namespace Domotica
 		Button buttonChangePinState2;
 		Button buttonChangePinState3;
 		Button smtemp;
-		Button smlicht;
+		Button smlight;
 		Button tempSwitch;
 		Button lightSwitch;
 		Button count;
@@ -71,19 +71,19 @@ namespace Domotica
 		Button buttonC_1;
         TextView textViewServerConnect;
 		public TextView textViewChangePinStateValue, textViewChangePinStateValue2, textViewChangePinStateValue3,  textViewSensorValue, textViewSensorValueb, textViewDebugValue, textviewSeconds;
-		EditText editTextIPAddress, editTextIPPort, tempvalue, lichtvalue, countvalue;
+		EditText editTextIPAddress, editTextIPPort, tempvalue, lightvalue, countvalue;
 		bool sensor = false;
 		bool tempsensor = false;
 		bool lightsensor = false;
 		bool specialtemp = false;
-		bool speciallicht = false;
+		bool speciallight = false;
 		bool tempvoltageoff = true;
-		bool lichtvoltageoff = true;
+		bool lightvoltageoff = true;
 		bool tempfirst = false;
 		bool lightfirst = false;
-		int lichtvalue1;
+		int lightvalue1;
 		int tempvalue1;
-		int teller = 0;
+		int counter = 0;
 		int timerCounter;
 
         Timer timerSockets, timerCount;             // Timers   
@@ -109,7 +109,7 @@ namespace Domotica
 			tempSwitch = FindViewById<Button> (Resource.Id.tempSwitch);
 			lightSwitch = FindViewById<Button> (Resource.Id.lightSwitch);
 			smtemp = FindViewById<Button> (Resource.Id.smtemp);
-			smlicht = FindViewById<Button> (Resource.Id.smlicht);
+			smlight = FindViewById<Button> (Resource.Id.smlight);
             textViewServerConnect = FindViewById<TextView>(Resource.Id.textViewServerConnect);
             textViewChangePinStateValue = FindViewById<TextView>(Resource.Id.textViewChangePinStateValue);
 			textViewChangePinStateValue2 = FindViewById<TextView>(Resource.Id.textViewChangePinStateValue2);
@@ -119,7 +119,7 @@ namespace Domotica
             editTextIPAddress = FindViewById<EditText>(Resource.Id.editTextIPAddress);
             editTextIPPort = FindViewById<EditText>(Resource.Id.editTextIPPort);
 			tempvalue = FindViewById<EditText>(Resource.Id.tempvalue);
-			lichtvalue = FindViewById<EditText>(Resource.Id.lichtvalue);
+			lightvalue = FindViewById<EditText>(Resource.Id.lightvalue);
 			count = FindViewById<Button> (Resource.Id.count);
 			countvalue = FindViewById<EditText>(Resource.Id.countvalue);
 			textviewSeconds = FindViewById<TextView>(Resource.Id.textViewSeconds);
@@ -132,21 +132,17 @@ namespace Domotica
 			commandList.Add(new Tuple<string, TextView>("t", textViewChangePinStateValue2));
 			commandList.Add(new Tuple<string, TextView>("u", textViewChangePinStateValue3));
 
-            // activation of connector -> threaded sockets otherwise -> simple sockets 
-            // connector = new Connector(this);
-
-            this.Title = (connector == null) ? this.Title + " (simple sockets)" : this.Title + " (thread sockets)";
-
 
 			// timer object, running clock
+			// Timer voor x aantal seconden dat de socket aan of uit gaat.
 			timerCount = new System.Timers.Timer() { Interval = 1000, Enabled = false }; // Interval >= 1000
 			timerCount.Elapsed += (obj, args) =>
 			{
-				teller++;
-				if(teller == timerCounter)
+				counter++;
+				if(counter == timerCounter)
 				{
 					socket.Send(Encoding.ASCII.GetBytes("x"));
-					teller = 0;
+					counter = 0;
 					timerCount.Enabled = false;
 				}
 			};
@@ -166,6 +162,9 @@ namespace Domotica
                     }
                     else timerSockets.Enabled = false;  // If socket broken -> disable timer
 
+				/* Als de temperatuurwaarde kleiner is dan de ingestelde waarde in de app, dan wordt de socket uit gezet. 
+				 * En zodra de temperatuurwaarde boven de ingestelde waarde komt, dan gaat de socket aan.
+				 */
 				if(tempsensor || lightsensor)
 				{
 					if(specialtemp)
@@ -183,18 +182,22 @@ namespace Domotica
 						}
 					}
 
-					if(speciallicht)
+				/* Als de lichtsensorwaarde groter is dan de ingestelde waarde in de app, dan wordt de socket uit gezet. 
+				 * En zodra de lichtsensorwaarde beneden de ingestelde waarde komt, dan gaat de socket aan.
+				 */
+
+					if(speciallight)
 					{
-						lichtvalue1 = Convert.ToInt16(lichtvalue.Text);
-						if(lichtvalue1 > Convert.ToInt16(textViewSensorValueb.Text) && lichtvoltageoff)
+						lightvalue1 = Convert.ToInt16(lightvalue.Text);
+						if(lightvalue1 > Convert.ToInt16(textViewSensorValueb.Text) && lightvoltageoff)
 						{
 							socket.Send(Encoding.ASCII.GetBytes("y"));
-							lichtvoltageoff = false;
+							lightvoltageoff = false;
 						}
-						else if(lichtvalue1 < Convert.ToInt16(textViewSensorValueb.Text) && !lichtvoltageoff)
+						else if(lightvalue1 < Convert.ToInt16(textViewSensorValueb.Text) && !lightvoltageoff)
 						{
 							socket.Send(Encoding.ASCII.GetBytes("y"));
-							lichtvoltageoff = true;
+							lightvoltageoff = true;
 						}
 					}
 
@@ -203,6 +206,9 @@ namespace Domotica
                 //});
             };
 
+
+			// AUTOMATISCH connectie met de arduino als de app wordt opgestart.
+			// Staat nu uit
 			//string ip = "192.168.1.104";
 			string port = "3300";
 			string [] ip = new string [1];
@@ -210,12 +216,12 @@ namespace Domotica
 
 
 			int i = 0;
-			while (socket == null) 
+			/*while (socket == null) 
 			{
 				ConnectSocket (ip[i], port); //Direct connect to arduino
 				i++;
 			}
-
+			*/
 
             //Add the "Connect" button handler.
             if (buttonConnect != null)  // if button exists
@@ -227,7 +233,7 @@ namespace Domotica
                     {
                         if (connector == null) // -> simple sockets
                         {
-							ConnectSocket(ip[0], port);
+							ConnectSocket(editTextIPAddress.Text, editTextIPPort.Text);
                         }
                         else // -> threaded sockets
                         {
@@ -240,6 +246,7 @@ namespace Domotica
                 };
             }
 
+			//Versturen van een character naar de arduino zodat de Project C modus wordt geactiveerd.
 			//Add the "Connect" button handler.
 			if (buttonC != null)  // if button exists
 			{
@@ -248,7 +255,7 @@ namespace Domotica
 					socket.Send(Encoding.ASCII.GetBytes("g"));
 				};
 			}
-
+			//Versturen van een character naar de arduino als je de eerste van de keten bent bij Project C
 			//Add the "Connect" button handler.
 			if (buttonC_1 != null)  // if button exists
 			{
@@ -257,7 +264,7 @@ namespace Domotica
 					socket.Send(Encoding.ASCII.GetBytes("h"));
 				};
 			}
-
+			//Uitlezen van ingevulde aantal seconden en timer aanzetten
 			if (count != null)  // if button exists
 			{
 				count.Click += (sender, e) =>
@@ -266,7 +273,7 @@ namespace Domotica
 					timerCount.Enabled = true;
 				};
 			}
-
+			//Versturen van een character naar de arduino zodat de temperatuursensor aan of uit wordt gezet
 			if (tempSwitch != null)  // if button exists
 			{
 				tempSwitch.Click += (sender, e) =>
@@ -307,6 +314,7 @@ namespace Domotica
 				};
 			}
 
+			//Versturen van een character naar de arduino zodat de lichtsensor aan of uit wordt gezet
 			if (lightSwitch != null)  // if button exists
 			{
 				lightSwitch.Click += (sender, e) =>
@@ -347,6 +355,7 @@ namespace Domotica
 				};
 			}
 
+			//Versturen van een character naar de arduino zodat de specialmodus temperatuursensor aan of uit wordt gezet
 			if (smtemp != null)  // if button exists
 			{
 				smtemp.Click += (sender, e) =>
@@ -367,26 +376,28 @@ namespace Domotica
 				};
 			}
 
-			if (smlicht != null)  // if button exists
+			//Versturen van een character naar de arduino zodat de specialmodus lichtsensor aan of uit wordt gezet
+			if (smlight != null)  // if button exists
 			{
-				smlicht.Click += (sender, e) =>
+				smlight.Click += (sender, e) =>
 				{
-					if(speciallicht == false)
+					if(speciallight == false)
 					{
-						speciallicht = true;
+						speciallight = true;
 					}
 					else
 					{
-						speciallicht = false;
-						if(!lichtvoltageoff)
+						speciallight = false;
+						if(!lightvoltageoff)
 						{
 							socket.Send(Encoding.ASCII.GetBytes("y"));
-							lichtvoltageoff = true;
+							lightvoltageoff = true;
 						}
 					}
 				};
 			}
 
+			//Versturen van character naar Arduino voor het aanzetten van Socket 1
             //Add the "Change pin state" button handler.
             if (buttonChangePinState != null)
             {
@@ -403,6 +414,7 @@ namespace Domotica
                 };
             }
 
+			//Versturen van character naar Arduino voor het aanzetten van Socket 2
 			if (buttonChangePinState2 != null)
 			{
 				buttonChangePinState2.Click += (sender, e) =>
@@ -418,6 +430,7 @@ namespace Domotica
 				};
 			}
 
+			//Versturen van character naar Arduino voor het aanzetten van Socket 3
 			if (buttonChangePinState3 != null)
 			{
 				buttonChangePinState3.Click += (sender, e) =>
@@ -494,6 +507,7 @@ namespace Domotica
                 butPinEnabled = true;
             }
             //Edit the control's properties on the UI thread
+			//De buttons zijn disabled als er nog geen connectie is gemaakt met de Arduino. 
             RunOnUiThread(() =>
             {
                 textViewServerConnect.Text = text;
@@ -509,8 +523,10 @@ namespace Domotica
 					tempSwitch.Enabled = butPinEnabled;
 					lightSwitch.Enabled = butPinEnabled;
 					smtemp.Enabled = butPinEnabled;
-					smlicht.Enabled = butPinEnabled;
+					smlight.Enabled = butPinEnabled;
 					count.Enabled = butPinEnabled;
+					buttonC.Enabled = butPinEnabled;
+					buttonC_1.Enabled = butPinEnabled;
             });
         }
 
@@ -586,38 +602,7 @@ namespace Domotica
                 }
             }
         }
-
-        //Prepare the Screen's standard options menu to be displayed.
-        public override bool OnPrepareOptionsMenu(IMenu menu)
-        {
-            //Prevent menu items from being duplicated.
-            menu.Clear();
-
-            MenuInflater.Inflate(Resource.Menu.menu, menu);
-            return base.OnPrepareOptionsMenu(menu);
-        }
-
-        //Executes an action when a menu button is pressed.
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.exit:
-                    //Force quit the application.
-                    System.Environment.Exit(0);
-                    return true;
-                case Resource.Id.abort:
-
-                    //Stop threads forcibly (for debugging only).
-                    if (connector != null)
-                    {
-                        if (connector.CheckStarted()) connector.Abort();
-                    }
-                    return true;
-            }
-            return base.OnOptionsItemSelected(item);
-        }
-
+			
         //Check if the entered IP address is valid.
         private bool CheckValidIpAddress(string ip)
         {

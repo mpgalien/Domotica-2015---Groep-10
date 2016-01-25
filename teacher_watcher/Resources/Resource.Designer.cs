@@ -120,16 +120,7 @@ namespace com.xamarin.recipes.teacherwatcher
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
-			
-			// aapt resource value: 0x7f040001
-			public const int application_name = 2130968577;
-			
-			// aapt resource value: 0x7f040003
-			public const int changeImage = 2130968579;
-			
-			// aapt resource value: 0x7f040002
-			public const int email = 2130968578;
+			public const int application_name = 2130968576;
 			
 			static String()
 			{
