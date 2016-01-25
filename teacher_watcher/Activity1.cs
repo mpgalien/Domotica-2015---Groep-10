@@ -102,7 +102,7 @@ namespace com.xamarin.recipes.teacherwatcher
 							presence.SetTextColor(Color.Green);
 							imageView.SetImageResource (Resource.Drawable.nhl_light);
 							WebClient client = new WebClient();
-							Uri uri = new Uri("http://82.73.15.137/?actie=locatie"); //Webserver Raspberry Pi
+							Uri uri = new Uri("http://82.73.15.137/?action=location"); //Webserver Raspberry Pi
 							NameValueCollection parameters = new NameValueCollection();
 
 
@@ -123,7 +123,7 @@ namespace com.xamarin.recipes.teacherwatcher
 							presence.SetTextColor(Color.Red);
 							imageView.SetImageResource (Resource.Drawable.nhl_dark);
 							WebClient client = new WebClient();
-							Uri uri = new Uri("http://82.73.15.137/?actie=locatie"); //Webserver Raspberry Pi
+							Uri uri = new Uri("http://82.73.15.137/?action=location"); //Webserver Raspberry Pi
 							NameValueCollection parameters = new NameValueCollection();
 
 

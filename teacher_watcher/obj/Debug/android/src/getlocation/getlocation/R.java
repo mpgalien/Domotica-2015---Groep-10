@@ -29,9 +29,6 @@ public final class R {
         public static final int main=0x7f030000;
     }
     public static final class string {
-        public static final int Hello=0x7f040000;
-        public static final int application_name=0x7f040001;
-        public static final int changeImage=0x7f040003;
-        public static final int email=0x7f040002;
+        public static final int application_name=0x7f040000;
     }
 }
